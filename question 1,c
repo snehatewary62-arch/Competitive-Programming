@@ -1,0 +1,54 @@
+#include <stdio.h>
+
+int main() {
+    int n, threshold;
+    int count = 0;
+    int sum = 0;
+    int minAttendance, position;
+
+    printf("Enter number of students: ");
+    scanf("%d", &n);
+
+    int attendance[n];
+
+    printf("Enter attendance percentages:\n");
+
+    for (int i = 0; i < n; i++) {
+        printf("Student %d: ", i + 1);
+        scanf("%d", &attendance[i]);
+    }
+
+    printf("Enter attendance threshold: ");
+    scanf("%d", &threshold);
+
+    minAttendance = attendance[0];
+    position = 1;
+
+    for (int i = 0; i < n; i++) {
+
+        sum = sum + attendance[i];
+
+        if (attendance[i] < threshold) {
+            count++;
+        }
+
+        if (attendance[i] < minAttendance) {
+            minAttendance = attendance[i];
+            position = i + 1;
+        }
+    }
+
+    float average = (float)sum / n;
+
+    printf("\n----- University Attendance Analysis -----\n");
+
+    printf("Students below %d%% = %d\n", threshold, count);
+
+    printf("Lowest attendance = %d%%\n", minAttendance);
+
+    printf("Position of student with lowest attendance = %d\n", position);
+
+    printf("Average attendance = %.2f%%\n", average);
+
+    return 0;
+}
