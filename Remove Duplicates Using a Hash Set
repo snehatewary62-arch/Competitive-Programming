@@ -1,0 +1,44 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define SIZE 200003
+
+int hashTable[SIZE];
+
+int hash(int x) {
+    unsigned int key = (unsigned int)x;
+    return key % SIZE;
+}
+
+int insert(int x) {
+    int index = hash(x);
+
+    while (hashTable[index] != 0) {
+        if (hashTable[index] == x)
+            return 0;
+
+        index = (index + 1) % SIZE;
+    }
+
+    hashTable[index] = x;
+    return 1;
+}
+
+int main() {
+    int n, roll;
+
+    scanf("%d", &n);
+
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &roll);
+
+        if (insert(roll)) {
+            printf("%d ", roll);
+        }
+    }
+
+    printf("\n");
+
+    return 0;
+}
